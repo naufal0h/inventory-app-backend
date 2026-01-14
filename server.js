@@ -7,18 +7,13 @@ const PORT = process.env.PORT || 10000;
 require('dotenv').config();
 
 const app = express();
+const mongoURI = process.env.MONGODB_URI;
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log("✅ Berhasil Terhubung ke MongoDB Compass (Lokal)");
-  })
-  .catch((err) => {
-    console.error("❌ Gagal Konek ke Compass. Pastikan MongoDB Service sudah Start.");
-    console.error("Detail Error:", err.message);
-  });
-
+mongoose.connect(mongoURI)
+    .then(() => console.log("✅ MongoDB Atlas Terhubung"))
+    .catch(err => console.log("❌ Gagal Koneksi:", err));
 
 // 2. Schema Barang
 const BarangSchema = new mongoose.Schema({
@@ -104,4 +99,6 @@ app.get('/api/barang', async (req, res) => {
     res.json(data);
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+    console.log(`🚀 Server berjalan di port ${PORT}`);
+});
