@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const XLSX = require('xlsx');
 const cors = require('cors');
+const PORT = process.env.PORT || 10000;
 require('dotenv').config();
 
 const app = express();
@@ -103,4 +104,4 @@ app.get('/api/barang', async (req, res) => {
     res.json(data);
 });
 
-app.listen(5000, () => console.log("Server running on port 5000"));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
