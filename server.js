@@ -8,7 +8,9 @@ require('dotenv').config();
 
 const app = express();
 const mongoURI = process.env.MONGODB_URI;
-app.use(cors());
+app.use(cors(
+    origin: "https://inventory-app-frontend-a79s.vercel.app" // Ganti dengan URL Vercel Anda
+));
 app.use(express.json());
 
 mongoose.connect(mongoURI)
