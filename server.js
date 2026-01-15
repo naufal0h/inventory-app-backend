@@ -9,10 +9,14 @@ require('dotenv').config();
 const app = express();
 const mongoURI = process.env.MONGODB_URI;
 app.use(cors({
-    origin: "https://inventory-app-frontend-a79s.vercel.app", // URL Vercel Anda
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
-  }));
+  // Mengizinkan domain produksi dan local development
+  origin: [
+    "https://inventory-app-frontend-a79s.vercel.app",
+    "http://localhost:3000" // Jika Anda sedang testing lokal
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 mongoose.connect(mongoURI)
     .then(() => console.log("✅ MongoDB Atlas Terhubung"))
